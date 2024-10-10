@@ -35,3 +35,5 @@ COPY --from=builder /usr/src/app/.env.production ./
 
 # Install only production dependencies
 RUN npm ci --omit=dev
+
+CMD ["pm2-runtime", "ecosystem.config.js", "--no-daemon"]
