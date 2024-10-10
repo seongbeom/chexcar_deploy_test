@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: chexcar_app_production
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3001}:3000"  # 외부에서 PORT 설정 (기본값 3001)
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}  # NODE_ENV 없으면 기본값으로 production 사용
+    command: /bin/sh -c "cp .env.${NODE_ENV} .env && pm2-runtime ecosystem.config.js --no-daemon"

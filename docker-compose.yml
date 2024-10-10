@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: chexcar_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder  # Stage 1까지만 빌드하도록 설정
+    ports:
+      - "${PORT:-3000}:3000"  # 외부에서 PORT 설정 (기본값 3000)
+    volumes:
+      - .:/usr/src/app  # 로컬 소스 코드를 컨테이너에 마운트
+      - /usr/src/app/node_modules  # node_modules는 빈 볼륨으로 설정
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}  # NODE_ENV 없으면 기본값으로 development 사용
+    command: /bin/sh -c "cp .env.${NODE_ENV} .env && npm run start:dev"  # .env.${NODE_ENV} 복사 후 개발 모드 실행
