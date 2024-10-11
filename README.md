@@ -117,17 +117,7 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 ## **2. 운영 환경 설정**
 1. **애플리케이션 빌드 및 실행**:
-    ```bash
-    NODE_ENV=production PORT=3001 docker-compose -p chexcar_app_production -f docker-compose.prod.yml up -d --build
-    ```
-    - `NODE_ENV` 값이 설정되지 않았을 경우 기본적으로 `production`로 설정됩니다.
-    - `PORT` 값이 설정되지 않았을 경우 기본적으로 `3001` 포트를 사용합니다.
-   
-    
-2. **앱 중지**:
-    ```bash
-    docker-compose -p chexcar_app_production down
-    ```
+    - 운영 환경은 Dockerfile 을 사용합니다.
 
 ## **3. 유용한 명령어**
 
