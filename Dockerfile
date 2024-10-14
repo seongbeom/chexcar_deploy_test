@@ -16,6 +16,16 @@ COPY scripts/preinstall.sh ./scripts/preinstall.sh
 # Give execute permissions to the preinstall.sh script
 RUN chmod +x ./scripts/preinstall.sh
 
+# Define build arguments for AWS credentials
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_DEFAULT_REGION
+
+# Use the build arguments (optional, if needed inside the build)
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+
 RUN sh ./scripts/preinstall.sh
 RUN npm ci
 
