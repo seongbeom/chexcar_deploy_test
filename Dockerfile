@@ -7,8 +7,15 @@ WORKDIR /usr/src/app
 # Install NestJS CLI for development
 RUN npm install -g @nestjs/cli
 
+# Set NODE_ENV environment variable (you can change 'production' to your preferred value)
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
+
 # Install dependencies
 COPY package*.json ./
+COPY scripts ./ 
+
+# RUN export ${NODE_ENV}
 RUN npm ci
 
 # Copy application source code
