@@ -31,10 +31,10 @@ COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/package*.json ./
 # PM2 config 파일 복사
 COPY --from=builder /usr/src/app/ecosystem.config.js ./
-COPY --from=builder /usr/src/app/.env.* ./
+COPY --from=builder /usr/src/app/.env ./
 
 # Install only production dependencies
 RUN npm ci --omit=dev
 
 # Run the application
-CMD ["sh", "-c", "cp .env.${NODE_ENV} .env && pm2-runtime ecosystem.config.js --no-daemon"]
+CMD ["sh", "-c", "pm2-runtime ecosystem.config.js --no-daemon"]
